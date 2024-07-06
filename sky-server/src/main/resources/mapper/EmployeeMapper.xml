@@ -26,7 +26,7 @@
                 password = #{password},
             </if>
             <if test="phone != null">
-                username = #{username},
+                phone = #{phone},
             </if>
             <if test="sex != null">
                 sex = #{sex},
