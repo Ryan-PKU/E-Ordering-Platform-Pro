@@ -89,7 +89,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void startorstop(Integer status, long id) {
+    public void startOrStop(Integer status, long id) {
         Employee employee = Employee.builder()
                 .id(id)
                 .status(status)
