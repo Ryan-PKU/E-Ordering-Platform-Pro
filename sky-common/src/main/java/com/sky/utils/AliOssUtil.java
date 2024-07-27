@@ -4,21 +4,26 @@ import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.OSSException;
+import com.sky.properties.AliOssProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.ByteArrayInputStream;
 
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 @Slf4j
 public class AliOssUtil {
 
-    private String endpoint;
+    /*private String endpoint;
     private String accessKeyId;
     private String accessKeySecret;
-    private String bucketName;
+    private String bucketName;*/
 
+    @Autowired
+    private AliOssProperties aliOssProperties;
     /**
      * 文件上传
      *
@@ -28,7 +33,12 @@ public class AliOssUtil {
      */
     public String upload(byte[] bytes, String objectName) {
 
+        String endpoint = aliOssProperties.getEndpoint();
+        String accessKeyId = aliOssProperties.getAccessKeyId();
+        String accessKeySecret = aliOssProperties.getAccessKeySecret();
+        String bucketName = aliOssProperties.getBucketName();
         // 创建OSSClient实例。
+        //log.info("endpoint: {},bucketName: {}",endpoint,bucketName);
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
 
         try {
